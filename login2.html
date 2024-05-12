@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Profile</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <ul class="list">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="aboutMe.html">About Me</a></li>
+          <li><a href="project.html">Project</a></li>
+          <li><a href="">My Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div id="welcome-message"></div>
+        <button class="logout" onclick="Logout()">Logout</button>
+      </div>
+    </header>
+    <main>
+      <div class="box">
+        <div class="container2">
+          <div class="top-header">
+            <span class="sp">Wb Web</span>
+            <h2>WB Login</h2>
+          </div>
+          <div class="input-field">
+            <input
+              type="text"
+              class="input"
+              placeholder="Username"
+              id="username"
+            />
+            <i class="bx bx-user"></i>
+          </div>
+          <div class="input-field">
+            <input
+              type="text"
+              class="input"
+              placeholder="password"
+              id="password"
+            />
+            <i class="bx bx-user"></i>
+          </div>
+          <div class="input-field">
+            <!-- <button class="submit" value="Login" onclick="login()" /> Login -->
+            <button class="submit" onclick="login()">DDawng kys</button>
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <input type="checkbox" id="check" />
+              <label for="check">Remember</label>
+            </div>
+            <div class="right">
+              <label> <a href="#">Wang Ba </a></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script>
+    const data = [
+      {
+        username: "Wb1106",
+        password: "11062002",
+      },
+      {
+        username: "Wb",
+        password: "11062002",
+      },
+    ];
+
+    let isLogin = false;
+    function login() {
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+      let checkLogin = data.some(
+        (value) => value.username === username && value.password === password
+      );
+      if (checkLogin) {
+        alert("Dang nhap thanh cong");
+        localStorage.setItem("username", username);
+        let welcomeMessage = document.getElementById("welcome-message");
+        localStorage.setItem("welcomeMessage", "hello  " + username);
+        welcomeMessage.textContent = "Hello    " + username;
+        // window.location.href = "project.html";
+        restoreWelcomeMessage();
+      } else {
+        alert("Wrong username or password");
+      }
+    }
+    function restoreWelcomeMessage() {
+      let welcomeMessage = document.getElementById("welcome-message");
+      let savedMessage = localStorage.getItem("welcomeMessage");
+
+      if (savedMessage) {
+        welcomeMessage.textContent = savedMessage;
+      }
+    }
+    // Gọi hàm restoreWelcomeMessage() khi trang được load lại
+    window.addEventListener("load", restoreWelcomeMessage);
+
+    function Logout() {
+      localStorage.removeItem("welcomeMessage");
+      localStorage.removeItem("username");
+      window.onbeforeunload = function () {
+        localStorage.clear;
+      };
+      window.location.reload();
+    }
+  </script>
+</html>

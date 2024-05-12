@@ -28,6 +28,7 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
+      <div id="welcome-message"></div>
     </header>
     <main>
       <div class="logo">
@@ -47,6 +48,10 @@
   </body>
 </html>
 <script>
+  let welcomeMessage = document.getElementById("welcome-message");
+  localStorage.getItem("welcomeMessage", "hello" + username);
+  welcomeMessage.textContent = "Hello" + username;
+
   function git() {
     window.location.href = "https://github.com/wangba1106";
   }
